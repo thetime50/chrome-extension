@@ -1,0 +1,26 @@
+{
+    // 插件名称
+    "name": "simple-ext",
+    // 插件的描述
+    "description": "从零深入Chrome插件开发  掘金",
+    // 插件的版本
+    "version": "0.0.001",
+    // 配置插件程序的版本号，主流版本是2，最新是3
+    "manifest_version": 2,
+    // 新增popup弹框
+    "browser_action": {
+        "default_popup": "browser_action/popup.html",
+        "default_icon": "browser_action/image/celestial-body.png"
+    },
+    // 新增命令
+    "commands": {
+        "_execute_browser_action": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+E",
+                "mac": "MacCtrl+Shift+E"
+            },
+            /* "description": "commands/popup.html" // 这个没有效果??*/
+        }
+    }
+}
+
