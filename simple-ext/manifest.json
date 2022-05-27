@@ -7,7 +7,8 @@
     "version": "0.0.002",
     // 配置插件程序的版本号，主流版本是2，最新是3
     "manifest_version": 2,
-    "permissions": ["storage", "declarativeContent", "activeTab"],
+    "permissions": ["storage", "declarativeContent", "activeTab", "alarms" ],
+    "options_page": "options/index.html",
     // 新增popup弹框
     "browser_action": {
         "default_popup": "browser_action/popup.html",
@@ -17,8 +18,8 @@
         // page 和 script 只配置一个
         // "page": "background/index.html",
         "scripts": ["background/index.js"],
-        /* 持久化?? */
-        "persistent": true 
+        /* Event Page 持久性后台 建议为false 用事件驱动 会影响计时器运行 */
+        "persistent": false 
     },
     // 新增命令
     "commands": {
