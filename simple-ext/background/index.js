@@ -66,3 +66,84 @@ chrome.browserAction.onClicked.addListener(() => {
   let gettingTitle = chrome.browserAction.getTitle({}); // 这里会失败 估计要拿一下啊tab // 为什么这是 Promise??
   gettingTitle.then(toggleTitle);
 });
+
+// 初始化菜单
+
+chrome.runtime.onInstalled.addListener(function () {
+    chrome.contextMenus.create({
+        id: "1",
+        title: "Test Context Menu",
+        contexts: ["all"],
+    });
+        //分割线
+    chrome.contextMenus.create({
+        id: "0",
+        type: "separator",
+    });
+        // 父级菜单
+    chrome.contextMenus.create({
+        id: "2",
+        title: "Parent Context Menu",
+        contexts: ["all"],
+    });
+    chrome.contextMenus.create({
+        id: "21",
+        parentId: "2",
+        title: "Child Context Menu1",
+        contexts: ["all"],
+    });
+    chrome.contextMenus.create({
+        id: "3",
+        title: "使用百度搜索：%s",
+        contexts: ["selection"], // 选中文本触发的菜单
+        // onclick: function (params) {
+        //     console.log('params', params)
+        //     chrome.tabs.create({
+        //         url: "https://www.baidu.com/s?ie=utf-8&wd=" +
+        //             encodeURI(params.selectionText),
+        //     });
+        // },
+    });
+});
+chrome.contextMenus.onClicked.addListener(function(info, tab) { // 唤醒非持久脚本
+    console.log('info', info)
+    if (info.menuItemId == "3") {
+        chrome.tabs.create({
+            url: "https://www.baidu.com/s?ie=utf-8&wd=" +
+                encodeURI(info.selectionText),
+        });
+    }
+});
+
+// https://stackoverflow.com/questions/26245888/adding-context-menu-item-on-a-non-persistent-background-script
+// chrome.runtime.onInstalled.addListener(function() {
+//     chrome.contextMenus.create({
+//         title: 'My menu',
+//         id: 'menu1', // you'll use this in the handler function to identify this context menu item
+//         contexts: ['all'],
+//     });
+// });
+
+// chrome.contextMenus.onClicked.addListener(function(info, tab) {
+//     if (info.menuItemId === "menu1") { // here's where you'll need the ID
+//         // do something
+//     }
+// });
+
+// to /simple-ext/content_scripts/index.js
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+  console.log("background 收到的消息", message);
+  sendResponse("我收到了你的消息！");
+});
+
+
+// 监听storage 的变化
+chrome.storage.onChanged.addListener(function (changes, namespace) {
+  for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
+    console.log(
+      `Storage key "${key}" in namespace "${namespace}" changed.`,
+      `Old value was "${oldValue}", new value is "${newValue}".`
+    );
+  }
+});
+

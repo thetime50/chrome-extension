@@ -13,7 +13,7 @@
         "48": "browser_action/image/celestial-body.png",
         "128": "browser_action/image/celestial-body.png"
     },
-    "permissions": ["storage", "declarativeContent", "activeTab", "alarms" ],
+    "permissions": ["storage", "declarativeContent", "activeTab", "alarms", "contextMenus" ],
     "options_page": "options/index.html",
     // 新增popup弹框
     "browser_action": {
@@ -53,6 +53,11 @@
                 "mac": "MacCtrl+Shift+E"
             }
         }
+    },
+    "chrome_url_overrides": {
+        "newtab": "overrides/newtab.html"
+        // "history": "history.html",
+        // "bookmarks": "bookmarks.html"
     }
 }
 

@@ -6,6 +6,11 @@ function constructOptions(kButtonColors) {
         let button = document.createElement("button");
         button.style.backgroundColor = item;
         button.addEventListener("click", function () {
+            // 用户数据使用chrome.storage存储可以和Chrome的同步功能自动同步。
+            // 插件的内容脚本可以直接访问用户数据，而无需background。
+            // chrome.storage可以直接存储对象，而localStorage是存储字符串，需要再次转换
+            // storage.sync 云端同步数据
+            // storage.local 本地数据
             chrome.storage.sync.set({
                 color: item
             }, function () {
