@@ -38,6 +38,7 @@ function popupInit(){
             desPopup = '/browser_action/new-popup.html'
         }
         console.log('popup, desPopup', popup, desPopup)
+        alert("set popup "+desPopup)
         chrome.browserAction.setPopup({popup: desPopup});
     });
     el.appendChild(button);
@@ -80,6 +81,37 @@ function titleInit(){
 
 }
 
+
+function funCreate(elId,title,btnText,cb){
+    let el = document.getElementById(elId);
+    if(!el){
+        let titleEl = document.createElement('h2')
+        titleEl.innerText = title
+        document.body.appendChild(titleEl)
+        el = document.createElement('div')
+        el.id = elId
+        document.body.appendChild(el)
+    }
+    let button = document.createElement('button')
+    button.innerText  = btnText
+    button.addEventListener("click", cb)
+    el.appendChild(button)
+}
+
+function badgeInit(){
+    let cnt = 0
+    funCreate('badgeBtn','设置 badge 徽章','set badge',async function () {
+        cnt = (cnt+1)%4
+        if(cnt){
+            chrome.browserAction.setBadgeText({ text: /* "new-"+ */cnt.toString() });
+            chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 20] });
+        }else{
+            chrome.browserAction.setBadgeText({ text: '' });
+        }
+    });
+}
+
 constructOptions(kButtonColors);
 popupInit()
 titleInit()
+badgeInit()

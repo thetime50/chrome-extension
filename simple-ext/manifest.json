@@ -24,7 +24,7 @@
             "24":"browser_action/image/celestial-body.png",
             "32":"browser_action/image/celestial-body.png"
         },
-        "default_title": "simple-ext" // optional 鼠标悬停icon显示
+        "default_title": "simple-ext" // optional 鼠标悬停icon显示提示文本
     },
     // 与browser_action 功能相近
     // "browser_action": {},
