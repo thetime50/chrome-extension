@@ -1,0 +1,19 @@
+
+@keyframes example {
+    from {
+        background-color: #8c8;
+    }
+
+    50% {
+        background-color: #f88;
+    }
+    100% {
+        background-color: #8c8;
+    }
+}
+.wrapper_new #u>a.toindex{
+    font-weight: 800;
+    border-radius: 3px;
+    animation: 0.5s example infinite;
+}
+
