@@ -2,18 +2,32 @@
     // 插件名称
     "name": "simple-ext",
     // 插件的描述
-    "description": "从零深入Chrome插件开发  掘金",
+    "description": "从零深入Chrome插件开发  掘金 https://github.com/thetime50/chrome-extension/tree/main/simple-ext",
     // 插件的版本
     "version": "0.0.002",
     // 配置插件程序的版本号，主流版本是2，最新是3
     "manifest_version": 2,
+    "icons":{
+        "16":"browser_action/image/celestial-body.png",
+        "32":"browser_action/image/celestial-body.png",
+        "48": "browser_action/image/celestial-body.png",
+        "128": "browser_action/image/celestial-body.png"
+    },
     "permissions": ["storage", "declarativeContent", "activeTab", "alarms" ],
     "options_page": "options/index.html",
     // 新增popup弹框
     "browser_action": {
         "default_popup": "browser_action/popup.html",
-        "default_icon": "browser_action/image/celestial-body.png"
+        // "default_icon": "browser_action/image/celestial-body.png",
+        "default_icon":{
+            "16":"browser_action/image/celestial-body.png",
+            "24":"browser_action/image/celestial-body.png",
+            "32":"browser_action/image/celestial-body.png"
+        },
+        "default_title": "simple-ext" // optional 鼠标悬停icon显示
     },
+    // 与browser_action 功能相近
+    // "browser_action": {},
     "background": {
         // page 和 script 只配置一个
         // "page": "background/index.html",

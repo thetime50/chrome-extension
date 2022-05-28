@@ -24,7 +24,7 @@ function alarmsTest() {
 
 chrome.runtime.onInstalled.addListener(function () {
     console.log("插件已被安装2");
-    alarmsTest()
+    // alarmsTest()
 });
 
 chrome.runtime.onInstalled.addListener(function () {
@@ -48,4 +48,21 @@ chrome.runtime.onInstalled.addListener(function () {
             actions: [new chrome.declarativeContent.ShowPageAction()],
         }, ]);
     });
+});
+
+// 手动切换title
+// https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/browserAction/getTitle#examples
+function toggleTitle(title) {
+  if (title == "this") {
+    chrome.browserAction.setTitle({title: "that"});
+  } else {
+    chrome.browserAction.setTitle({title: "this"});
+  }
+}
+// https://developer.chrome.com/docs/extensions/reference/browserAction/#event-onClicked
+// 有弹窗弹出不会触发 要把 browser_action.default_popup 去掉才会触发
+chrome.browserAction.onClicked.addListener(() => { 
+  console.log('toggleTitle')
+  let gettingTitle = chrome.browserAction.getTitle({}); // 这里会失败 估计要拿一下啊tab // 为什么这是 Promise??
+  gettingTitle.then(toggleTitle);
 });
