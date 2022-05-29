@@ -58,6 +58,7 @@
         "newtab": "overrides/newtab.html"
         // "history": "history.html",
         // "bookmarks": "bookmarks.html"
-    }
+    },
+    "devtools_page": "devtools/index.html"
 }
 
