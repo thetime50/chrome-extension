@@ -22,3 +22,9 @@ vue create --preset kocal/vue-web-extension vue-web-ext
 ```
 
 这个项目问题太多了 换别的实现
+
+
+3. vue3-chrome-ext-template
+
+[vue3-chrome-ext-template](https://github.com/cinob/vue3-chrome-ext-template)
+
