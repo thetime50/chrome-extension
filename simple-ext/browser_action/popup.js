@@ -17,3 +17,45 @@ changeColor.onclick = function (el) {
 
     });
 };
+
+
+function funCreate(elId,title,btnText,cb){
+    let el = document.getElementById(elId);
+    if(!el){
+        let titleEl = document.createElement('h2')
+        titleEl.innerText = title
+        document.body.appendChild(titleEl)
+        el = document.createElement('div')
+        el.id = elId
+        document.body.appendChild(el)
+    }
+    let button = document.createElement('button')
+    button.innerText  = btnText
+    button.addEventListener("click", cb)
+    el.appendChild(button)
+}
+
+// 在 popup 页面中调用 background 的方法
+function callBgMethInit(){
+    let cnt = 0
+    funCreate('callBgMeth','调用 background 方法','call background method',async function () {
+        var bg = chrome.extension.getBackgroundPage();
+        bg.alertInfo('hello background')
+    });
+}
+
+// 在 background 页面中调用 popup 的方法
+function insertCtn(num){
+    const elId = 'insertCtn'
+    let el = document.getElementById(elId);
+    if(!el){
+        el = document.createElement('h2')
+        el.id = elId
+        document.body.appendChild(el)
+    }
+    el.innerText = '来自 background 的数字 '+num
+}
+
+callBgMethInit()
+
+

@@ -173,5 +173,20 @@ chrome.webRequest.onBeforeRequest.addListener(
     ["blocking"] // blocking requestBody extraHeaders  https://developer.chrome.com/docs/extensions/reference/webRequest/#type
 );
 
+// 在popup 调用 background 的方法
+function alertInfo(str){
+    alert(str)
+}
 
-
+// 在 background 调用 popup 的方法
+let popCtn = 0
+function callPopupMath(){ // 开发者窗口调用
+    var views = chrome.extension.getViews({type:'popup'});
+    if(views.length > 0) {
+    // 相当于popup的windows对象
+        console.dir(views[0]);
+        views[0].insertCtn(popCtn++)
+    }else{
+        console.log('no popup')
+    }
+}
