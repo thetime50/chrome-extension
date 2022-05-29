@@ -25,6 +25,12 @@ vue create --preset kocal/vue-web-extension vue-web-ext
 
 
 3. vue3-chrome-ext-template
+/vue3-chrome-ext
 
 [vue3-chrome-ext-template](https://github.com/cinob/vue3-chrome-ext-template)
 
+4. vue-cli-plugin-chrome-extension-cli
+
+/vue-plugin-cli     
+
+[vue-cli-plugin-chrome-extension-cli](https://github.com/sanyu1225/vue-cli-plugin-chrome-extension-cli/tree/60a6d0e96fb66642b73742bde18fabf888321d97)
