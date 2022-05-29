@@ -162,7 +162,7 @@ chrome.webRequest.onBeforeRequest.addListener(
     function (details) {
       //www.baidu.com/img/flexible/logo/pc/result.png
         if(/\blogo\b.*\.png/.test( details.url) || /\bPCtm.*\.png/.test( details.url)){
-            console.log('details', details)
+            // console.log('details', details)
             return {
                 redirectUrl:'https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/topnav/newzhibo-a6a0831ecd.png'
             }
@@ -209,3 +209,19 @@ function sendMessageToContentScript() {
         );
     });
 }
+
+// 向 content_script 建立长连接
+// 触发连接事件
+chrome.runtime.onConnect.addListener(function(port) { // 由background 接收
+  console.log('onConnect port', port)
+  console.assert(port.name == "knockknock");
+  port.onMessage.addListener(function(msg) { // 发送连接消息
+      console.log('msg', msg)
+    if (msg.joke == "Knock knock")
+      port.postMessage({question: "Who's there?"});
+    else if (msg.answer == "Madame")
+      port.postMessage({question: "Madame who?"});
+    else if (msg.answer == "Madame... Bovary")
+      port.postMessage({question: "I don't get it."});
+  });
+});

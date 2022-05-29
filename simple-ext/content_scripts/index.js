@@ -59,3 +59,15 @@ chrome.runtime.onMessage.addListener(
       sendResponse({farewell: "bad"});
     }
   });
+
+  
+// 向 background 建立长连接
+var port = chrome.runtime.connect({name: "knockknock"}); // 由centent-script 建立
+port.postMessage({joke: "Knock knock"});
+port.onMessage.addListener(function(msg) {
+  console.log('centent_sctipt connect msg', msg)
+  if (msg.question == "Who's there?")
+    port.postMessage({answer: "Madame"});
+  else if (msg.question == "Madame who?")
+    port.postMessage({answer: "Madame... Bovary"});
+});
