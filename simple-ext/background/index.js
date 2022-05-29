@@ -193,6 +193,7 @@ function callPopupMath(){ // 开发者窗口调用
 
 // 在 background 中向 content_script 发送消息
 // 不知道为什么这里调用不成功
+// 在背景页命令行中调用
 function sendMessageToContentScript() {
     chrome.tabs.query({ /* active: true, */ /* currentWindow: true  */}, function (tabs) {
         console.log('tabs[0]', tabs[0])
