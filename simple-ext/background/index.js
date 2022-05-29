@@ -147,3 +147,31 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
   }
 });
 
+// 桌面通知
+// https://developer.chrome.com/docs/extensions/reference/notifications/#method-create
+chrome.notifications.create(null, {
+  type: "basic",
+  iconUrl: "/browser_action/image/celestial-body.png",
+  title: "喝水小助手",
+  message: "看到此消息的人可以和我一起来喝一杯水",
+});
+
+// 接口拦截
+// https://developer.chrome.com/docs/extensions/reference/webRequest/#event-onBeforeRequest
+chrome.webRequest.onBeforeRequest.addListener(
+    function (details) {
+      //www.baidu.com/img/flexible/logo/pc/result.png
+        if(/\blogo\b.*\.png/.test( details.url) || /\bPCtm.*\.png/.test( details.url)){
+            console.log('details', details)
+            return {
+                redirectUrl:'https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/topnav/newzhibo-a6a0831ecd.png'
+            }
+        }
+        return {cancel: false}
+    },
+    { urls: ["<all_urls>"] }, // filter
+    ["blocking"] // blocking requestBody extraHeaders  https://developer.chrome.com/docs/extensions/reference/webRequest/#type
+);
+
+
+

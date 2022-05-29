@@ -13,7 +13,14 @@
         "48": "browser_action/image/celestial-body.png",
         "128": "browser_action/image/celestial-body.png"
     },
-    "permissions": ["storage", "declarativeContent", "activeTab", "alarms", "contextMenus" ],
+    "permissions": [
+        "storage", "declarativeContent", "activeTab", 
+        "alarms", "contextMenus", "notifications",
+
+        "webRequest", // 拦截api需要 persistent true 常驻后台
+        "webRequestBlocking", //阻塞api 权限
+        "*://*.baidu.com/" // 这个好像没效果
+    ],
     "options_page": "options/index.html",
     // 新增popup弹框
     "browser_action": {
@@ -33,7 +40,7 @@
         // "page": "background/index.html",
         "scripts": ["background/index.js"],
         /* Event Page 持久性后台 建议为false 用事件驱动 会影响计时器运行 */
-        "persistent": false 
+        "persistent": true 
     },
     "content_scripts":[{ // 对应 executeScript方法 运行空间是独立的 可以拿到dom
        
