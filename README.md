@@ -44,3 +44,13 @@ vue create --preset kocal/vue-web-extension vue-web-ext
 值得参考
 
 
+5. vite
+[Chrome Extension (Vue 3 + Vue Router + Typescript + Vite + TailwindCSS)](https://dev.to/rezvitsky/chrome-extension-vue-3-vue-router-typescript-vite-tailwindcss-42d0)
+
+<s>/vite-ext </s>
+
+
+
+5. 官方 vue dev 插件如何编写的
+
+7. vue 模板项目原理
