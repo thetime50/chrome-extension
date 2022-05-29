@@ -29,8 +29,18 @@ vue create --preset kocal/vue-web-extension vue-web-ext
 
 [vue3-chrome-ext-template](https://github.com/cinob/vue3-chrome-ext-template)
 
+比较简单的项目模板
+
 4. vue-cli-plugin-chrome-extension-cli
 
 /vue-plugin-cli     
 
 [vue-cli-plugin-chrome-extension-cli](https://github.com/sanyu1225/vue-cli-plugin-chrome-extension-cli/tree/60a6d0e96fb66642b73742bde18fabf888321d97)
+
+有配置脚手架  
+没有优化开发环境??? 使用 npm run build-watch  
+[Extension Reloader](https://github.com/sanyu1225/vue-cli-plugin-chrome-extension-cli/tree/60a6d0e96fb66642b73742bde18fabf888321d97)
+
+值得参考
+
+
