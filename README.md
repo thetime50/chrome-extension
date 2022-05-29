@@ -11,12 +11,14 @@ chrome-extension
 [Building Chrome Extensions with Vue.js](https://medium.com/@simoneldevig_80359/building-chrome-extensions-with-vue-js-cafaefb82bd4)
 [How to Build a Chrome Extension with Vue](https://www.sitepoint.com/build-vue-chrome-extension/)
 
-[Unable to create a vue-web-extension from vue-cli](https://stackoverflow.com/questions/66784850/unable-to-create-a-vue-web-extension-from-vue-cli)
-[Cannot serve and build](https://github.com/Kocal/vue-web-extension/issues/683)
-
+[Unable to create a vue-web-extension from vue-cli](https://stackoverflow.com/questions/66784850/unable-to-create-a-vue-web-extension-from-vue-cli)  
+[Cannot serve and build](https://github.com/Kocal/vue-web-extension/issues/683)  
+[Webpack 5 support?](https://github.com/adambullmer/vue-cli-plugin-browser-extension/issues/126)
 
 使用 
 ```cmd
 # vue init kocal/vue-web-extension [NAME OF YOUR EXTENSION]
 vue create --preset kocal/vue-web-extension vue-web-ext 
 ```
+
+这个项目问题太多了 换别的实现
