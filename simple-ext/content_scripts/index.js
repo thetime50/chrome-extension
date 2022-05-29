@@ -41,3 +41,21 @@ chrome.runtime.sendMessage(
     console.log("收到来自后台的回复：" + response);
   }
 );
+
+console.log('hello content script')
+// 接收 background 的消息
+chrome.runtime.onMessage.addListener(
+  function(
+      request, 
+      sender,  // 不同的发送方
+      sendResponse
+    ) {
+    console.log(sender.tab ?
+      "from a content script:" + sender.tab.url :
+      "from the extension");
+    if (request.greeting.indexOf("hello") !== -1){
+      sendResponse({farewell: "goodbye"});
+    }else{
+      sendResponse({farewell: "bad"});
+    }
+  });

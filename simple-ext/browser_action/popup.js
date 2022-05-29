@@ -56,6 +56,29 @@ function insertCtn(num){
     el.innerText = '来自 background 的数字 '+num
 }
 
+function sendMessageToContentScriptInit(){
+
+    function sendMessageToContentScript() {
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            console.log('tabs[0]', tabs[0])
+            if(!tabs.length){
+                console.log('no tabs')
+                return
+            }
+            chrome.tabs.sendMessage(
+                tabs[0].id,
+                { greeting: "hello，我是popup，主动发消息给content-script" },
+                function (response) {
+                    console.log('response', response)
+                    console.log(response.farewell);
+                }
+            );
+        });
+    }
+    funCreate('sendContent','发送消息到 ContentScript','send ContentScript message',sendMessageToContentScript)
+}
+        
 callBgMethInit()
+sendMessageToContentScriptInit()
 
 

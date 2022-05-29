@@ -190,3 +190,22 @@ function callPopupMath(){ // 开发者窗口调用
         console.log('no popup')
     }
 }
+
+// 在 background 中向 content_script 发送消息
+// 不知道为什么这里调用不成功
+function sendMessageToContentScript() {
+    chrome.tabs.query({ /* active: true, */ /* currentWindow: true  */}, function (tabs) {
+        console.log('tabs[0]', tabs[0])
+        if(!tabs.length){
+            console.log('no tabs')
+            return
+        }
+        chrome.tabs.sendMessage(
+            tabs[0].id,
+            { greeting: "hello，我是后台，主动发消息给content-script" },
+            function (response) {
+                console.log(response.farewell);
+            }
+        );
+    });
+}
