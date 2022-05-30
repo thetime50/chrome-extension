@@ -1,6 +1,7 @@
 <template>
   <div class="main_app">
     <h1>Hello {{msg}}</h1>
+    <div>this is entry test</div>
     <div>
       <input type="text" v-model="num" />
     </div>
