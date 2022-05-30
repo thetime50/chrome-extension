@@ -1,18 +1,25 @@
 <template>
   <div class="main_app">
     <h1>Hello {{msg}}</h1>
+    <div>
+      <input type="text" v-model="num" />
+    </div>
+    <div>
+      str is: {{str}}
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'optionsView',
-  data () {
-    return {
-      msg: 'options'
-    }
+  export default {
+    name:"optionsView"
   }
-}
+</script>
+<script setup >
+import { ref, /* defineProps,defineEmits,defineExpose */ } from 'vue'
+
+const msg = 'options'
+const str = ref(0)
 
 </script>
 
