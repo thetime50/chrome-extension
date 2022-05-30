@@ -8,6 +8,7 @@
     <div>
       str is: {{str}}
     </div>
+    <router-view />
   </div>
 </template>
 
