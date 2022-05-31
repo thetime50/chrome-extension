@@ -1,4 +1,5 @@
-const home = ()=>import('@/options/pages/home/home.vue')
+const home = () => import('@/options/pages/home/home.vue')
+const about = () => import('@/options/pages/about/about.vue')
 
 const routes = [
     {
@@ -7,7 +8,13 @@ const routes = [
     },
     {
         path: '/home',
+        name:'home',
         component: home
+    },
+    {
+        path: '/about',
+        name: 'about',
+        component: about
     }
 ]
 
