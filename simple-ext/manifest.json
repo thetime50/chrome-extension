@@ -19,7 +19,8 @@
 
         "webRequest", // 拦截api需要 persistent true 常驻后台
         "webRequestBlocking", //阻塞api 权限
-        "*://*.baidu.com/" // 这个好像没效果
+        "*://*.baidu.com/", // 这个好像没效果
+        "debugger" // chrome.debugger
     ],
     "options_page": "options/index.html",
     // 新增popup弹框

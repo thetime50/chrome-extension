@@ -1,4 +1,11 @@
 // devtools.js
+
+console.log('hello devtool');
+let devtoolObj = {a:'hello devtool'}
+// 会打印到panel 的console里面 但是作用域是独立的
+
+console.log('chrome :>> ', chrome);
+
 // 创建扩展面板
 chrome.devtools.panels.create(
   // 扩展面板显示名称
