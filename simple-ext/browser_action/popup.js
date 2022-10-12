@@ -13,6 +13,16 @@ changeColor.onclick = function (el) {
                 code: 'document.body.style.backgroundColor = "' + color + '";',
                 // file:
             });
+            
+            // chrome.scripting.executeScript({ // scripting 是 undefinde
+            //         func:()=>{
+            //             console.log('hello hello', )
+            //         }
+            //     },
+            //     () => {
+                   
+            //     }
+            // );
         });
 
     });
