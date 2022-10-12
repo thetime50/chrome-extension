@@ -27,6 +27,18 @@ document
     });
   });
 
+function delay(ms) {
+    return new Promise((resolve, reject) => {
+        setTimeout(resolve, ms);
+    })
+}
+
+function pmcall(fun,...args){
+  return new Promise((resolve,reject)=>{
+    fun(...args,reject)
+  })
+}
+
 var version = "1.0";
 // debugger api test
 async function debuggerApi_test() {
@@ -37,11 +49,10 @@ async function debuggerApi_test() {
   })
 
   await new Promise((resolve, reject) => {
-    chrome.debugger.attach({
-      tabId: tabs[0].id
-    },
-    version,
-    resolve)
+    chrome.debugger.attach(
+      {tabId: tabs[0].id},
+      version,
+      resolve)
   })
 
   function onAttach(tabId) {
@@ -61,13 +72,44 @@ async function debuggerApi_test() {
   onAttach(tabs[0].id)
 
   let tabId = tabs[0].id
+  await new Promise((resolve, reject) => {
+    chrome.debugger.sendCommand({
+      tabId: tabId
+    }, "Debugger.enable", {}, resolve)
+  })
+  
+  let pmLlist = []
+  // 为什么这里打开会有问题
+  // 会抓到Log.entryAdded
+  pmLlist.push( pmcall(chrome.debugger.sendCommand, {
+    tabId: tabId
+  }, "Log.enable", {}))
 
-  chrome.debugger.sendCommand({tabId:tabId}, "Network.enable");
+  // 只能抓取用户打印
+  pmLlist.push(pmcall(chrome.debugger.sendCommand, {
+    tabId: tabId
+  }, "Console.enable", {}))
+
+  // 资源和用户请求都有
+  pmLlist.push(pmcall(chrome.debugger.sendCommand, {
+    tabId: tabId
+  }, "Network.enable", {}))
+  // 要在"Debugger.enable" 的作用域里才有效 await 或者delay后可能就没效了
+  await Promise.allSettled(pmLlist)
+
   chrome.debugger.onEvent.addListener(onEvent);
-  function onEvent(debuggeeId, message, params) { 
-    // 没有触发 没有啥效果
-    console.log('debuggeeId, message, params :>> ', debuggeeId, message, params);
+  function onEvent(debuggeeId, message, params) {
+    console.log('1 :>> ', 1);
+    if (['Debugger.scriptParsed'].includes(message)) {
+      return
+    }
+    console.log('debuggeeId :>> ', debuggeeId);
+    console.log('message, :>> ', message,);
+    console.log('params :>> ', params);
+    if(params.request){
+      console.log('params.request.url :>> ', params.request.url);
+    }
   }
-  console.log("Network.enable")
+  console.log("Done")
 }
 debuggerApi_test()
