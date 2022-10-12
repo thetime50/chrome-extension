@@ -28,11 +28,16 @@ changeColor.onclick = function (el) {
     });
 };
 
+function setText(selector,text){
+    let el = document.querySelector(selector)
+    el.innerText = text
+}
 
 function funCreate(elId,title,btnText,cb){
     let el = document.getElementById(elId);
     if(!el){
         let titleEl = document.createElement('h2')
+        titleEl.id = elId+'Title'
         titleEl.innerText = title
         document.body.appendChild(titleEl)
         el = document.createElement('div')
@@ -87,8 +92,31 @@ function sendMessageToContentScriptInit(){
     }
     funCreate('sendContent','发送消息到 ContentScript','send ContentScript message',sendMessageToContentScript)
 }
+
+///////////////////////////
+function pmcall(fun, ...args) {
+    return new Promise((resolve, reject) => {
+        fun(...args, resolve)
+    })
+}
+
+async function addDebuggerApiTestButtion(){
+    let tabs = await pmcall( chrome.tabs.query, { active: true, currentWindow: true })
+    let tabId = tabs[0].id
+    let getText = (id, db) => `切换页面调试 ${id} now:${Boolean(db)}`
+    let bgwin = chrome.extension.getBackgroundPage()
+    let db = await bgwin.getDebug(tabId)
+    console.log('db :>> ', db);
+    async function switchDebug(){
+        let res = await bgwin.switchDebug(tabId)
         
+        setText('#debuggerApiTestTitle', getText(tabId, res))
+    }
+    funCreate('debuggerApiTest', getText(tabId, db), 'switchDebug', switchDebug)
+}
+
 callBgMethInit()
 sendMessageToContentScriptInit()
+addDebuggerApiTestButtion()
 
 

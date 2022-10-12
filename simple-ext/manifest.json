@@ -38,8 +38,8 @@
     // "browser_action": {},
     "background": {
         // page 和 script 只配置一个
-        // "page": "background/index.html",
-        "scripts": ["background/index.js"],
+        "page": "background/index.html",
+        // "scripts": ["background/index.js"],
         /* Event Page 持久性后台 建议为false 用事件驱动 会影响计时器运行 */
         "persistent": true 
     },

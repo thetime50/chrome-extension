@@ -1,4 +1,11 @@
 // background.js
+import {
+    getDebug,
+    switchDebug
+} from './debuggerApiTest.js'
+
+window.getDebug = getDebug
+window.switchDebug = switchDebug
 
 function alarmsTest() {
     let timeout = 1000 * 60 * 0.05; // 3 minutes in milliseconds
