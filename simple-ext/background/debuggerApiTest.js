@@ -66,6 +66,12 @@ async function openDebug(tabId) {
   pmLlist.push(pmcall(chrome.debugger.sendCommand, {
     tabId: tabId
   }, "Network.enable", {}))
+  
+  // 运行时 捕获 throw Error
+  pmLlist.push(pmcall(chrome.debugger.sendCommand, {
+    tabId: tabId
+  }, "Runtime.enable", {}))
+
   // 要在"Debugger.enable" 的作用域里才有效 await 或者delay后可能就没效了
   await Promise.allSettled(pmLlist)
 
@@ -76,12 +82,22 @@ async function openDebug(tabId) {
     if (['Debugger.scriptParsed'].includes(message)) {
       return
     }
-    console.log('debuggeeId :>> ', debuggeeId);
-    console.log('message, :>> ', message, );
-    console.log('params :>> ', params);
-    if (params.request) {
-      console.log('params.request.url :>> ', params.request.url);
+    let item={
+      "message":message,
+      "debuggeeId.tabId": debuggeeId.tabId,
+      "params":params,
     }
+    let col = [
+      'message',
+      'debuggeeId.tabId',
+      // 'params',
+    ]
+
+    if (params.request) {
+      item["params.request.url"] = params.request.url
+      col.push('params.request.url')
+    }
+    console.table([item], col)
   }
   console.log("Done")
 }
